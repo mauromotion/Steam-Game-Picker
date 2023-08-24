@@ -9,12 +9,22 @@ Steam Random Picker
   <fieldset>
     <legend>Make your choices</legend>
     <div>
-      <input id="any_game" name="any_game" placeholder="Any Game" type="radio" />
-      <input id="never_played" name="never_played" placeholder="Never Played Games" type="radio" />
-      <input id="only_played" name="only_played" placeholder="Only Played Games" type="radio" />
-      <input id="top_5" name="top_5" placeholder="Top 5 Most Played Games" type="radio" />
-      <input id="top_10" name="top_10" placeholder="Top 10 Most Played Games" type="radio" />
-      <input id="top_20" name="top_20" placeholder="Top 20 Most Played Games" type="radio" />
+      <div>
+        <input id="any_game" name="filter" placeholder="Any Game" type="radio" checked />
+        <label for="any_game">Any game</label>
+        <input id="never_played" name="filter" placeholder="Never Played Games" type="radio" />
+        <label for="never_played">Never played only</label>
+        <input id="only_played" name="filter" placeholder="Only Played Games" type="radio" />
+        <label for="only_played">Already played only</label>
+      </div>
+      <div>
+        <input id="top_5" name="filter" placeholder="Top 5 Most Played Games" type="radio" />
+        <label for="top_5">Top 5 played games only</label>
+        <input id="top_10" name="filter" placeholder="Top 10 Most Played Games" type="radio" />
+        <label for="top_10">Top 10 played games only</label>
+        <input id="top_20" name="filter" placeholder="Top 20 Most Played Games" type="radio" />
+        <label for="top_20">Top 20 played games only</label>
+      </div>
     </div>
     <div>
       <button type="submit">Get a random game</button>

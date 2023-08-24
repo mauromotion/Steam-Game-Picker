@@ -15,7 +15,7 @@
     - [ ] Any game in the first top 10
     - [ ] Any game in the first top 20
     - [ ] Nice to have: genres filters
- - [ ] Result
+ - [ ] Results
   - [ ] Implement re-roll with same settings
   - [ ] Go back to filters
   - [ ] Nice To Have: click to launch game

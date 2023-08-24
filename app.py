@@ -27,11 +27,9 @@ def close_connection(exception):
 #     return "<p>Steam Random Picker</p>"
 
 
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    if request.method == 'GET':
-        return render_template('home.html')
-    else:
+    if request.method == 'POST':
         username = request.form.get('username')
         # or get_steam_data(request.form.get('username')) == None:
         if not request.form.get('username'):
@@ -40,6 +38,9 @@ def home():
             games = get_steam_data(username)
             print(games)
             print(username)
+            return render_template('filters.html')
+    else:
+        return render_template('home.html')
 
 
 @app.route('/filters', methods=['GET', 'POST'])
