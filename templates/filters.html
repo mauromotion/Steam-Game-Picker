@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Steam Random Picker
+{% endblock %}
+
+{% block main %}
+<form action="/filters" method="post">
+  <fieldset>
+    <legend>Make your choices</legend>
+    <div>
+      <input id="any_game" name="any_game" placeholder="Any Game" type="radio" />
+      <input id="never_played" name="never_played" placeholder="Never Played Games" type="radio" />
+      <input id="only_played" name="only_played" placeholder="Only Played Games" type="radio" />
+      <input id="top_5" name="top_5" placeholder="Top 5 Most Played Games" type="radio" />
+      <input id="top_10" name="top_10" placeholder="Top 10 Most Played Games" type="radio" />
+      <input id="top_20" name="top_20" placeholder="Top 20 Most Played Games" type="radio" />
+    </div>
+    <div>
+      <button type="submit">Get a random game</button>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}
