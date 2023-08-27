@@ -9,23 +9,17 @@ steam = Steam(KEY)
 # Get data from Steam API
 def get_steam_data(username):
 
+    # Fetch user's info
     userinfo = steam.users.search_user(username)
-    # print(userinfo)
-
     steam_id = userinfo['player']['steamid']
     nickname = userinfo['player']['personaname']
     tot_games = steam.users.get_owned_games(steam_id)['game_count']
     avatar = userinfo['player']['avatarfull']
-    # print(steam_id)
-
     owned_games = steam.users.get_owned_games(steam_id)['games']
-    # print(owned_games)
-
-    # terraria = steam.apps.search_games("terraria")
-    # print(terraria)
 
     library = []
 
+    # Build each game's data set
     for game in owned_games:
         new_game = {}
 
@@ -33,27 +27,48 @@ def get_steam_data(username):
         url_base = 'https://store.steampowered.com/app/{}'
         url = url_base.format(appid)
 
+        # Fetch the game's description
         try:
             description = steam.apps.get_app_details(
                 appid)[str(appid)]['data']['short_description']
-        except KeyError:
+        except (KeyError, TypeError):
             description = 'No description'
 
+        # Fetch the game's image
         try:
-            genres = steam.apps.get_app_details(
-                appid)[str(appid)]['data']['genres']['description']
+            image = steam.apps.get_app_details(
+                appid)[str(appid)]['data']['header_image']
         except KeyError:
-            genres = 'No data'
+            image = 'No image'
 
+        # Fetch the game's metacritic score
+        try:
+            metacritic = steam.apps.get_app_details(
+                appid)[str(appid)]['data']['metacritic']['score']
+        except (KeyError, TypeError):
+            metacritic = 'No score'
+
+        # Fetch the game's genres
+        # try:
+        #     genres = steam.apps.get_app_details(
+        #         appid)[str(appid)]['data']['genres']['description']
+        # except KeyError:
+        #     genres = 'No data'
+
+        # Build the data set
         new_game['appid'] = game['appid']
         new_game['name'] = game['name']
         new_game['url'] = url
-        new_game['genres'] = genres
+        new_game['image'] = image
+        new_game['metacritic'] = metacritic
+        # new_game['genres'] = genres
         new_game['description'] = description
         new_game['playtime'] = round((game['playtime_forever'] / 60), 1)
 
+        # Add each game to the library
         library.append(new_game)
 
+    # Build the usera_data dictionary
     user_data = {
         'nickname': nickname,
         'tot_games': tot_games,
@@ -99,7 +114,7 @@ And so I can return something like:
 {
 'name': name,
 'playtime': playtime,
-'image': image_url,
+'image': header_image,
 'url': store_url,
 'description': description,
 'genres': genres
