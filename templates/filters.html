@@ -5,6 +5,9 @@ Steam Random Picker
 {% endblock %}
 
 {% block main %}
+<h2>Hello, {{ nickname }}!</h2>
+<image src={{ avatar }} />
+<h4>{{ tot_games }} Games Owned</h4>
 <form action="/filters" method="post">
   <fieldset>
     <legend><h3>Make your choices</h3></legend>

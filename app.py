@@ -1,43 +1,58 @@
 import sqlite3
-from flask import Flask, render_template, g, request
+from flask import Flask, render_template, request
 
 from helpers import get_user_data, get_user_library
 
 app = Flask(__name__)
 
+
 # Set up sqlite3 database
-DATABASE = './library.db'
-
-
 def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
+    db = sqlite3.connect('library.db')
     return db
 
 
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
+def init_db():
+    db = get_db()
+    db.executescript(open('schema.sql').read())
+    db.commit()
+    return db
 
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+
     if request.method == 'POST':
         username = request.form.get('username')
         # or get_steam_data(request.form.get('username')) == None:
         if not request.form.get('username'):
             return render_template('apology.html')
         else:
+            db = init_db()
+
             user_data = get_user_data(username)
             user_library = get_user_library(username)
 
-            print(user_library)
-            print(user_data)
+            nickname = user_data['nickname']
+            tot_games = user_data['tot_games']
+            avatar = user_data['avatar']
 
-            return render_template('filters.html')
+            db.execute("INSERT INTO user (username, nickname, tot_games, avatar)  VALUES (?, ?, ?, ?)",
+                       (username, nickname, tot_games, avatar))
+            db.commit()
+
+            for game in user_library:
+                appid = game['appid']
+                name = game['name']
+                playtime = round(
+                    (game['playtime_forever'] / 60), 1)
+
+                db.execute(
+                    "INSERT INTO library (appid, name, playtime) VALUES (?, ?, ?)", (appid, name, playtime))
+
+            db.commit()
+
+            return render_template('filters.html', nickname=nickname, tot_games=tot_games, avatar=avatar)
     else:
         return render_template('home.html')
 

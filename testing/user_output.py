@@ -1313,13 +1313,14 @@
       ]
     }
 
+
 {
 'appid': 340,
 'name': 'Half-Life 2: Lost Coast',
 'url': 'https: //store.steampowered.com/app/340',
 'description': 'Originally planned as a section of the Highway 17 chapter of Half-Life 2, Lost Coast is a playable technology showcase that introduces High Dynamic Range lighting to the Source engine.',
 'playtime': 0.0
-    }
+}
 
 {
 'appid': 220,
@@ -1332,4 +1333,4 @@
 'playtime_linux_forever': 0,
 'rtime_last_played': 1387299458,
 'playtime_disconnected': 0
-    }
+}

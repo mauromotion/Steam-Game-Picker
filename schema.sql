@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS library;
+DROP TABLE IF EXISTS picked_games;
+
 CREATE TABLE user (
   username TEXT PRIMARY KEY NOT NULL,
   nickname TEXT NOT NULL,
@@ -22,6 +26,8 @@ CREATE TABLE picked_games (
     description TEXT NOT NULL,
     metacritic TEXT NOT NULL,
     genres TEXT NOT NULL,
-    FOREIGN KEY(appid) REFERENCES library(appid);
-    FOREIGN KEY(name) REFERENCES library(name);
+
+    FOREIGN KEY(appid) REFERENCES library(appid),
+    FOREIGN KEY(playtime) REFERENCES library(playtime),
+    FOREIGN KEY(name) REFERENCES library(name)
 );
