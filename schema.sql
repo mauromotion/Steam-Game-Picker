@@ -1,8 +1,16 @@
+CREATE TABLE user (
+  username TEXT PRIMARY KEY NOT NULL,
+  nickname TEXT NOT NULL,
+  tot_games NUMERIC NOT NULL,
+  avatar TEXT NOT NULL
+);
+
 CREATE TABLE library (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     appid NUMERIC not NULL,
     name TEXT NOT NULL,
-    playtime NUMERIC NOT NULL,
+    playtime NUMERIC NOT NULL
+);
 
 CREATE TABLE picked_games (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -16,4 +24,4 @@ CREATE TABLE picked_games (
     genres TEXT NOT NULL,
     FOREIGN KEY(appid) REFERENCES library(appid);
     FOREIGN KEY(name) REFERENCES library(name);
-)
+);
