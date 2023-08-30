@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, render_template, g, request
 
-from helpers import get_steam_data
+from helpers import get_user_data, get_user_library
 
 app = Flask(__name__)
 
@@ -22,10 +22,6 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-# @app.route("/hello")
-# def hello_world():
-#     return "<p>Steam Random Picker</p>"
-
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -35,9 +31,12 @@ def home():
         if not request.form.get('username'):
             return render_template('apology.html')
         else:
-            games = get_steam_data(username)
-            print(games)
-            print(username)
+            user_data = get_user_data(username)
+            user_library = get_user_library(username)
+
+            print(user_library)
+            print(user_data)
+
             return render_template('filters.html')
     else:
         return render_template('home.html')

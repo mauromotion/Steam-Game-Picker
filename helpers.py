@@ -7,7 +7,7 @@ steam = Steam(KEY)
 
 
 # Get data from Steam API
-def get_steam_data(username):
+def get_user_data(username):
 
     # Fetch user's info
     userinfo = steam.users.search_user(username)
@@ -15,58 +15,6 @@ def get_steam_data(username):
     nickname = userinfo['player']['personaname']
     tot_games = steam.users.get_owned_games(steam_id)['game_count']
     avatar = userinfo['player']['avatarfull']
-    owned_games = steam.users.get_owned_games(steam_id)['games']
-
-    library = []
-
-    # Build each game's data set
-    for game in owned_games:
-        new_game = {}
-
-        appid = game['appid']
-        url_base = 'https://store.steampowered.com/app/{}'
-        url = url_base.format(appid)
-
-        # Fetch the game's description
-        try:
-            description = steam.apps.get_app_details(
-                appid)[str(appid)]['data']['short_description']
-        except (KeyError, TypeError):
-            description = 'No description'
-
-        # Fetch the game's image
-        try:
-            image = steam.apps.get_app_details(
-                appid)[str(appid)]['data']['header_image']
-        except KeyError:
-            image = 'No image'
-
-        # Fetch the game's metacritic score
-        try:
-            metacritic = steam.apps.get_app_details(
-                appid)[str(appid)]['data']['metacritic']['score']
-        except (KeyError, TypeError):
-            metacritic = 'No score'
-
-        # Fetch the game's genres
-        # try:
-        #     genres = steam.apps.get_app_details(
-        #         appid)[str(appid)]['data']['genres']['description']
-        # except KeyError:
-        #     genres = 'No data'
-
-        # Build the data set
-        new_game['appid'] = game['appid']
-        new_game['name'] = game['name']
-        new_game['url'] = url
-        new_game['image'] = image
-        new_game['metacritic'] = metacritic
-        # new_game['genres'] = genres
-        new_game['description'] = description
-        new_game['playtime'] = round((game['playtime_forever'] / 60), 1)
-
-        # Add each game to the library
-        library.append(new_game)
 
     # Build the usera_data dictionary
     user_data = {
@@ -75,7 +23,68 @@ def get_steam_data(username):
         'avatar': avatar
     }
 
-    return library, user_data
+    return user_data
+
+
+# Get data from Steam API
+def get_user_library(username):
+
+    # Fetch user's library
+    userinfo = steam.users.search_user(username)
+    steam_id = userinfo['player']['steamid']
+    owned_games = steam.users.get_owned_games(steam_id)['games']
+
+    return owned_games
+
+
+# Fetch data for the random game that has been selected
+def get_game_data(appid):
+    game_data = {}
+
+    # Generate game's URL
+    url_base = 'https://store.steampowered.com/app/{}'
+    url = url_base.format(appid)
+
+    # Fetch the game's description
+    try:
+        description = steam.apps.get_app_details(
+            appid)[str(appid)]['data']['short_description']
+    except (KeyError, TypeError):
+        description = 'No description'
+
+    # Fetch the game's image
+    try:
+        image = steam.apps.get_app_details(
+            appid)[str(appid)]['data']['header_image']
+    except (KeyError, TypeError):
+        image = 'No image'
+
+    # Fetch the game's metacritic score
+    try:
+        metacritic = steam.apps.get_app_details(
+            appid)[str(appid)]['data']['metacritic']['score']
+    except (KeyError, TypeError):
+        metacritic = 'No score'
+
+    # Fetch the game's genres
+    try:
+        genres = steam.apps.get_app_details(
+            appid)[str(appid)]['data']['genres']['description']
+    except KeyError:
+        genres = 'No data'
+
+    # Build the data set
+    game_data['appid'] = appid
+    game_data['name'] = game['name']  # TODO Fetch from the DB
+    game_data['url'] = url
+    game_data['image'] = image
+    game_data['metacritic'] = metacritic
+    game_data['genres'] = genres
+    game_data['description'] = description
+    game_data['playtime'] = round(
+        (game['playtime_forever'] / 60), 1)  # TODO Fetch fomr DB
+
+    return game_data
 
 
 # Generate a random integer between 1 and the argument
