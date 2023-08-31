@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Steam Random Game Picker
+{% endblock %}
+
+{% block main %}
+<div id="card">
+  <h2><a href="{{ url }}">{{ name }}</a></h2>
+  <p>Played for {{ playtime }} hours</p>
+  <a href="{{ url }}"><img src="{{ image }}" alt="Game's image"></a>
+  <p id="description">{{ description }}</p>
+  <h3>Metacritic score: {{ metacritic }}</h3>
+  <h3>{{ genres }} </h3>
+</div>
+{% endblock %}

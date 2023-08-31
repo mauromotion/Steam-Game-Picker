@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, render_template, request
 
-from helpers import get_user_data, get_user_library
+from helpers import get_user_data, get_user_library, get_game_data, random_in_list
 
 app = Flask(__name__)
 
@@ -60,7 +60,59 @@ def home():
 @app.route('/filters', methods=['GET', 'POST'])
 def filters():
     if request.method == 'POST':
-        return render_template('results.html')
+        # Initialize the database
+        db = get_db()
+        c = db.cursor()
+
+        # Get the user's input
+        filter = request.form.get('filter')
+
+        # Initialize the variables
+        name = ''
+        playtime = 0
+        url = ''
+        description = ''
+        image = ''
+        metacritic = 0
+        genres = ''
+
+        # Logic
+        match filter:
+            case 'any_game':
+                count = (c.execute("SELECT COUNT(*) FROM library")
+                         ).fetchone()[0]
+                random_pick = str(random_in_list(count))
+                game_id = c.execute(
+                    "SELECT appid, name, playtime FROM library WHERE id = ?", (random_pick,))
+                game_row = game_id.fetchall()[0]
+                appid = game_row[0]
+                name = game_row[1]
+                playtime = game_row[2]
+
+                game_data = get_game_data(appid)
+
+                url = game_data['url']
+                description = game_data['description']
+                image = game_data['image']
+                metacritic = game_data['metacritic']
+                genres = game_data['genres']
+
+            case 'never_played':
+                print('never played')
+
+            case 'top_5':
+                print('top 5')
+
+            case 'top_10':
+                print('top 10')
+
+            case 'top_20':
+                print('top 20')
+
+            case _:
+                print('error')
+
+        return render_template('results.html', name=name, playtime=playtime, url=url, description=description, image=image, metacritic=metacritic, genres=genres)
     else:
         return render_template('filters.html')
 
