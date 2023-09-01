@@ -19,6 +19,42 @@ def init_db():
     return db
 
 
+# Random pick logic with db queries
+# FIXME: either add a second arg for the slice query or rework to use just one query
+def random_picker(query):
+    # Initialize the database
+    db = get_db()
+    c = db.cursor()
+
+    # Count the number of rowws/games in the resulting slice of db
+    count = (c.execute("SELECT COUNT(*) FROM (" + query + ")")
+             ).fetchone()[0]
+
+    # Pick a random number from 1 to the max of thte list
+    random_pick = str(random_in_list(count))
+    pick = (random_pick,)
+
+    # Get the data for the picked game in the db
+    query_pick = "SELECT * FROM (" + query + ") WHERE id = ?"
+    game_id = c.execute(query_pick, pick)
+    game_row = game_id.fetchone()
+
+    appid = game_row[1]
+    name = game_row[2]
+    playtime = game_row[3]
+
+    # Get the rest of the picked game's data from the API
+    game_data = get_game_data(appid)
+
+    url = game_data['url']
+    description = game_data['description']
+    image = game_data['image']
+    metacritic = game_data['metacritic']
+    genres = game_data['genres']
+
+    return appid, name, playtime, url, description, image, metacritic, genres
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
 
@@ -61,8 +97,8 @@ def home():
 def filters():
     if request.method == 'POST':
         # Initialize the database
-        db = get_db()
-        c = db.cursor()
+        # db = get_db()
+        # c = db.cursor()
 
         # Get the user's input
         filter = request.form.get('filter')
@@ -79,36 +115,23 @@ def filters():
         # Logic
         match filter:
             case 'any_game':
-                count = (c.execute("SELECT COUNT(*) FROM library")
-                         ).fetchone()[0]
-                random_pick = str(random_in_list(count))
-                game_id = c.execute(
-                    "SELECT appid, name, playtime FROM library WHERE id = ?", (random_pick,))
-                game_row = game_id.fetchall()[0]
-                appid = game_row[0]
-                name = game_row[1]
-                playtime = game_row[2]
-
-                game_data = get_game_data(appid)
-
-                url = game_data['url']
-                description = game_data['description']
-                image = game_data['image']
-                metacritic = game_data['metacritic']
-                genres = game_data['genres']
-
+                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
+                    "SELECT id, appid, name, playtime FROM library")
             case 'never_played':
-                print('never played')
-
+                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
+                    "SELECT id, appid, name, playtime FROM (SELECT * FROM library WHERE playtime = 0)")
+            case 'only_played':
+                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
+                    "SELECT id, appid, name, playtime FROM (SELECT * FROM library WHERE playtime != 0)")
             case 'top_5':
-                print('top 5')
-
+                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
+                    "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 5")
             case 'top_10':
-                print('top 10')
-
+                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
+                    "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 10")
             case 'top_20':
-                print('top 20')
-
+                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
+                    "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 20")
             case _:
                 print('error')
 
@@ -118,4 +141,7 @@ def filters():
 
 
 if __name__ == '__main__':
+    app.run(debug=True)
+    app.run(debug=True)
+    app.run(debug=True)
     app.run(debug=True)

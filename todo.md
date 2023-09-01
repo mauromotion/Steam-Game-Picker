@@ -4,11 +4,11 @@
 - [ ] Set up routes
  - [ ] Home
   - [ ] Set up flashing alerts instead of apology.html
-  - [ ] Set up the SQLite db
-  - [ ] Insert data into db
+  - [x] Set up the SQLite db
+  - [x] Insert data into db
  - [ ] Filters
   - [ ] Implement filters:
-    - [ ] Any game
+    - [x] Any game
     - [ ] Any never played game
     - [ ] Any already played game
     - [ ] Any game in the first top 5
@@ -21,7 +21,8 @@
   - [ ] Nice To Have: click to launch game
 - [ ] Helpers
   - [x] Write random number in a len(list) function
-  - [ ] Write function to build the correct URL for banners
+  - [x] Write function to build the correct URL for banners
+  - [ ] Write function to pick a random game that accepts a string/query as argument.
 
 I can try this:
 
@@ -30,8 +31,12 @@ I can try this:
   - When a game is picked make a single API call for the game and store the data in a db table. Use the data to build the results.
 
 Hopefully this way I'm not gonna make too many calls to the API and end up getting limited.
+  It worked!
 
 I think I need to save the json to a file so that I can build a db from it.
+  I didn't had to.
 
+To avoid repeating all the code for the various filters I could make a function that accept as an argument a string that is the actual db query, the only different part of each filter.
+  I need to give two args to the function, one for the count query and one for the actual slice.
 ## Frontend
 

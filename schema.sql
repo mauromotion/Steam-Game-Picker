@@ -16,6 +16,7 @@ CREATE TABLE library (
     playtime NUMERIC NOT NULL
 );
 
+/* FIXME: I don't need this table, most probably */ 
 CREATE TABLE picked_games (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     appid NUMERIC not NULL,
