@@ -62,26 +62,30 @@ def get_game_data(appid):
     # Fetch the game's metacritic score
     try:
         metacritic = steam.apps.get_app_details(
-            appid)[str(appid)]['data']['metacritic']['score']
+            appid, 'US', 'metacritic')[str(appid)]['data']['metacritic']['score']
     except (KeyError, TypeError):
         metacritic = 'No score'
 
     # Fetch the game's genres
-    # try:
-    #     output = ''
-    #     genres = steam.apps.get_app_details(
-    #         appid)[str(appid)]['data']['genres']
-    #     for genre in genres:
-    #         output = genre['description']
-    #         return output
-    # except KeyError:
-    #     output = 'No data'
+    try:
+        get_genres = steam.apps.get_app_details(
+            appid, 'US', 'genres')[str(appid)]['data']['genres']
+
+        genres = ''
+
+        for genre in get_genres:
+            value = genre['description']
+            genres += value + ", "
+
+        genres = genres[:-2]
+    except KeyError:
+        genres = 'No data'
 
     # Build the data set
     game_data['url'] = url
     game_data['image'] = image
     game_data['metacritic'] = metacritic
-    game_data['genres'] = 'testing'
+    game_data['genres'] = genres
     game_data['description'] = description
 
     return game_data

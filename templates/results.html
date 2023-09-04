@@ -13,4 +13,8 @@ Steam Random Game Picker
   <h3>Metacritic score: {{ metacritic }}</h3>
   <h3>{{ genres }} </h3>
 </div>
+<form action="/results" method="post">
+  <button type="submit">Get another game</button>
+  <button type="submit">Try a different filter</button>
+</form>
 {% endblock %}

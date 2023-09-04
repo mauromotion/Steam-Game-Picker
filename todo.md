@@ -22,7 +22,8 @@
 - [ ] Helpers
   - [x] Write random number in a len(list) function
   - [x] Write function to build the correct URL for banners
-  - [ ] Write function to pick a random game that accepts a string/query as argument.
+  - [x] Write function to pick a random game that accepts a string/query as argument.
+        - Moved to app.py, needs fixing.
 
 I can try this:
 

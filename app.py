@@ -19,42 +19,6 @@ def init_db():
     return db
 
 
-# Random pick logic with db queries
-# FIXME: either add a second arg for the slice query or rework to use just one query
-def random_picker(query):
-    # Initialize the database
-    db = get_db()
-    c = db.cursor()
-
-    # Count the number of rowws/games in the resulting slice of db
-    count = (c.execute("SELECT COUNT(*) FROM (" + query + ")")
-             ).fetchone()[0]
-
-    # Pick a random number from 1 to the max of thte list
-    random_pick = str(random_in_list(count))
-    pick = (random_pick,)
-
-    # Get the data for the picked game in the db
-    query_pick = "SELECT * FROM (" + query + ") WHERE id = ?"
-    game_id = c.execute(query_pick, pick)
-    game_row = game_id.fetchone()
-
-    appid = game_row[1]
-    name = game_row[2]
-    playtime = game_row[3]
-
-    # Get the rest of the picked game's data from the API
-    game_data = get_game_data(appid)
-
-    url = game_data['url']
-    description = game_data['description']
-    image = game_data['image']
-    metacritic = game_data['metacritic']
-    genres = game_data['genres']
-
-    return appid, name, playtime, url, description, image, metacritic, genres
-
-
 @app.route('/', methods=['GET', 'POST'])
 def home():
 
@@ -62,6 +26,7 @@ def home():
         username = request.form.get('username')
         # or get_steam_data(request.form.get('username')) == None:
         if not request.form.get('username'):
+            # TODO: either make the apology template or implement the flash alert
             return render_template('apology.html')
         else:
             db = init_db()
@@ -97,8 +62,8 @@ def home():
 def filters():
     if request.method == 'POST':
         # Initialize the database
-        # db = get_db()
-        # c = db.cursor()
+        db = get_db()
+        c = db.cursor()
 
         # Get the user's input
         filter = request.form.get('filter')
@@ -115,23 +80,152 @@ def filters():
         # Logic
         match filter:
             case 'any_game':
-                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
-                    "SELECT id, appid, name, playtime FROM library")
+                # Count the number of rowws/games in the resulting slice of db
+                count = (c.execute("SELECT COUNT(*) FROM library")
+                         ).fetchone()[0]
+
+                # Pick a random number from 1 to the max of the list
+                random_pick = (random_in_list(count))
+
+                pick = c.execute(
+                    "SELECT * FROM library").fetchall()[random_pick - 1]
+
+                # Get data from the picked row
+                appid = pick[1]
+                name = pick[2]
+                playtime = pick[3]
+
+                # Get the rest of the picked game's data from the API
+                game_data = get_game_data(appid)
+
+                url = game_data['url']
+                description = game_data['description']
+                image = game_data['image']
+                metacritic = game_data['metacritic']
+                genres = game_data['genres']
+
             case 'never_played':
-                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
-                    "SELECT id, appid, name, playtime FROM (SELECT * FROM library WHERE playtime = 0)")
+                # Count the number of rowws/games in the resulting slice of db
+                count = (c.execute("SELECT COUNT(*) FROM library WHERE playtime = 0")
+                         ).fetchone()[0]
+
+                # Pick a random number from 1 to the max of the list
+                random_pick = (random_in_list(count))
+
+                pick = c.execute(
+                    "SELECT * FROM library WHERE playtime = 0").fetchall()[random_pick - 1]
+
+                # Get data from the picked row
+                appid = pick[1]
+                name = pick[2]
+                playtime = pick[3]
+
+                # Get the rest of the picked game's data from the API
+                game_data = get_game_data(appid)
+
+                url = game_data['url']
+                description = game_data['description']
+                image = game_data['image']
+                metacritic = game_data['metacritic']
+                genres = game_data['genres']
+
             case 'only_played':
-                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
-                    "SELECT id, appid, name, playtime FROM (SELECT * FROM library WHERE playtime != 0)")
+                # Count the number of rowws/games in the resulting slice of db
+                count = (c.execute("SELECT COUNT(*) FROM library WHERE playtime != 0")
+                         ).fetchone()[0]
+
+                # Pick a random number from 1 to the max of the list
+                random_pick = (random_in_list(count))
+
+                pick = c.execute(
+                    "SELECT * FROM library WHERE playtime != 0").fetchall()[random_pick - 1]
+
+                # Get data from the picked row
+                appid = pick[1]
+                name = pick[2]
+                playtime = pick[3]
+
+                # Get the rest of the picked game's data from the API
+                game_data = get_game_data(appid)
+
+                url = game_data['url']
+                description = game_data['description']
+                image = game_data['image']
+                metacritic = game_data['metacritic']
+                genres = game_data['genres']
+
             case 'top_5':
-                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
-                    "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 5")
+                # Count the number of rowws/games in the resulting slice of db
+                count = 5
+
+                # Pick a random number from 1 to the max of the list
+                random_pick = (random_in_list(count))
+
+                pick = c.execute(
+                    "SELECT * FROM library ORDER BY playtime DESC LIMIT 5").fetchall()[random_pick - 1]
+
+                # Get data from the picked row
+                appid = pick[1]
+                name = pick[2]
+                playtime = pick[3]
+
+                # Get the rest of the picked game's data from the API
+                game_data = get_game_data(appid)
+
+                url = game_data['url']
+                description = game_data['description']
+                image = game_data['image']
+                metacritic = game_data['metacritic']
+                genres = game_data['genres']
+
             case 'top_10':
-                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
-                    "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 10")
+                # Count the number of rowws/games in the resulting slice of db
+                count = 10
+
+                # Pick a random number from 1 to the max of the list
+                random_pick = (random_in_list(count))
+
+                pick = c.execute(
+                    "SELECT * FROM library ORDER BY playtime DESC LIMIT 10").fetchall()[random_pick - 1]
+
+                # Get data from the picked row
+                appid = pick[1]
+                name = pick[2]
+                playtime = pick[3]
+
+                # Get the rest of the picked game's data from the API
+                game_data = get_game_data(appid)
+
+                url = game_data['url']
+                description = game_data['description']
+                image = game_data['image']
+                metacritic = game_data['metacritic']
+                genres = game_data['genres']
+
             case 'top_20':
-                appid, name, playtime, url, description, image, metacritic, genres = random_picker(
-                    "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 20")
+                # Count the number of rowws/games in the resulting slice of db
+                count = 20
+
+                # Pick a random number from 1 to the max of the list
+                random_pick = (random_in_list(count))
+
+                pick = c.execute(
+                    "SELECT * FROM library ORDER BY playtime DESC LIMIT 20").fetchall()[random_pick - 1]
+
+                # Get data from the picked row
+                appid = pick[1]
+                name = pick[2]
+                playtime = pick[3]
+
+                # Get the rest of the picked game's data from the API
+                game_data = get_game_data(appid)
+
+                url = game_data['url']
+                description = game_data['description']
+                image = game_data['image']
+                metacritic = game_data['metacritic']
+                genres = game_data['genres']
+
             case _:
                 print('error')
 
@@ -141,7 +235,4 @@ def filters():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    app.run(debug=True)
-    app.run(debug=True)
     app.run(debug=True)
