@@ -5,6 +5,10 @@ Steam Random Game Picker
 {% endblock %}
 
 {% block main %}
+<div id="userinfo">
+  <h2>{{ nickname }}</h2>
+  <img src="{{ avatar }}" width = "50px" alt="user's avatar image">
+</div>
 <div id="card">
   <h2><a href="{{ url }}">{{ name }}</a></h2>
   <p>Played for {{ playtime }} hours</p>
@@ -13,8 +17,10 @@ Steam Random Game Picker
   <h3>Metacritic score: {{ metacritic }}</h3>
   <h3>{{ genres }} </h3>
 </div>
-<form action="/results" method="post">
-  <button type="submit">Get another game</button>
-  <button type="submit">Try a different filter</button>
-</form>
+<div id="buttons">
+  <form action="/results" method="post">
+    <button type="submit" name="resubmit">Get another game</button>
+    <button type="submit" name="back_to_filters" value="back_to_filters"> Try a different filter</button>
+  </form>
+</div>
 {% endblock %}

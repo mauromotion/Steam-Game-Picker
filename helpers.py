@@ -8,22 +8,25 @@ steam = Steam(KEY)
 
 # Get data from Steam API
 def get_user_data(username):
+    try:
+        # Fetch user's info
+        userinfo = steam.users.search_user(username)
+        steam_id = userinfo['player']['steamid']
+        nickname = userinfo['player']['personaname']
+        tot_games = steam.users.get_owned_games(steam_id)['game_count']
+        avatar = userinfo['player']['avatarfull']
 
-    # Fetch user's info
-    userinfo = steam.users.search_user(username)
-    steam_id = userinfo['player']['steamid']
-    nickname = userinfo['player']['personaname']
-    tot_games = steam.users.get_owned_games(steam_id)['game_count']
-    avatar = userinfo['player']['avatarfull']
+        # Build the usera_data dictionary
+        user_data = {
+            'nickname': nickname,
+            'tot_games': tot_games,
+            'avatar': avatar
+        }
 
-    # Build the usera_data dictionary
-    user_data = {
-        'nickname': nickname,
-        'tot_games': tot_games,
-        'avatar': avatar
-    }
+        return user_data
 
-    return user_data
+    except (KeyError, ValueError, IndexError):
+        return None
 
 
 # Get data from Steam API

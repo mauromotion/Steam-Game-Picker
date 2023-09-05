@@ -9,11 +9,11 @@
  - [ ] Filters
   - [ ] Implement filters:
     - [x] Any game
-    - [ ] Any never played game
-    - [ ] Any already played game
-    - [ ] Any game in the first top 5
-    - [ ] Any game in the first top 10
-    - [ ] Any game in the first top 20
+    - [x] Any never played game
+    - [x] Any already played game
+    - [x] Any game in the first top 5
+    - [x] Any game in the first top 10
+    - [x] Any game in the first top 20
     - [ ] Nice to have: genres filters
  - [ ] Results
   - [ ] Implement re-roll with same settings
@@ -39,5 +39,10 @@ I think I need to save the json to a file so that I can build a db from it.
 
 To avoid repeating all the code for the various filters I could make a function that accept as an argument a string that is the actual db query, the only different part of each filter.
   I need to give two args to the function, one for the count query and one for the actual slice.
+
 ## Frontend
+- [ ] Make it responsive
+- [ ] Give it a bit of style
+- [ ] May try out some nice fonts from Bunny Fonts
+
 
