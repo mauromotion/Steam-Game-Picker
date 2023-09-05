@@ -65,7 +65,8 @@ def get_game_data(appid):
     # Fetch the game's metacritic score
     try:
         metacritic = steam.apps.get_app_details(
-            appid, 'US', 'metacritic')[str(appid)]['data']['metacritic']['score']
+            appid, 'US', 'metacritic'
+        )[str(appid)]['data']['metacritic']['score']
     except (KeyError, TypeError):
         metacritic = 'No score'
 
