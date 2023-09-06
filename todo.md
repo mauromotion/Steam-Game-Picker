@@ -1,13 +1,13 @@
 # Steam Random Picker To Do list
 
 ## Backend
-- [ ] Set up routes
- - [ ] Home
-  - [ ] Set up flashing alerts instead of apology.html
+- [x] Set up routes
+ - [x] Home
+  - [x] Set up flashing alerts instead of apology.html
   - [x] Set up the SQLite db
   - [x] Insert data into db
- - [ ] Filters
-  - [ ] Implement filters:
+ - [x] Filters
+  - [x] Implement filters:
     - [x] Any game
     - [x] Any never played game
     - [x] Any already played game
@@ -15,15 +15,14 @@
     - [x] Any game in the first top 10
     - [x] Any game in the first top 20
     - [ ] Nice to have: genres filters
- - [ ] Results
-  - [ ] Implement re-roll with same settings
-  - [ ] Go back to filters
+ - [x] Results
+  - [x] Implement re-roll with same settings
+  - [x] Go back to filters
   - [ ] Nice To Have: click to launch game
-- [ ] Helpers
+- [x] Helpers
   - [x] Write random number in a len(list) function
   - [x] Write function to build the correct URL for banners
   - [x] Write function to pick a random game that accepts a string/query as argument.
-        - Moved to app.py, needs fixing.
 
 I can try this:
 

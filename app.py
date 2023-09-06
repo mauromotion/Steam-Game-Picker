@@ -37,6 +37,10 @@ def init_db():
 #         db.commit()
 #         db.close()
 
+# @app.teardown_appcontext
+# def resetdb(exception):
+#     init_db()
+
 
 # Select a random game from a list based on a query
 def get_random_game(query):
