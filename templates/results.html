@@ -4,23 +4,29 @@
 Steam Random Game Picker
 {% endblock %}
 
-{% block main %}
-<div id="userinfo">
-  <h2>{{ nickname }}</h2>
-  <img src="{{ avatar }}" width = "50px" alt="user's avatar image">
+{% block header %}
+<div id="header">
+  <h1 ><a id="title" href="/"><i id="steam-icon" class="fa-brands fa-square-steam"></i>
+      Steam Game Picker</a></h1>
+  <image src={{ avatar }} id="avatar">
+  <h3><b>{{ nickname }}</b></h3>
+  <h3 id="info_text">{{ info_text }}</h3>
 </div>
+{% endblock %}
+
+{% block main %}
 <div id="card">
-  <h2><a href="{{ url }}">{{ name }}</a></h2>
+  <h1><a href="{{ url }}">{{ name }}</a></h1>
   <p>Played for {{ playtime }} hours</p>
   <a href="{{ url }}"><img src="{{ image }}" alt="Game's image"></a>
   <p id="description">{{ description }}</p>
   <h3>Metacritic score: {{ metacritic }}</h3>
-  <h3>{{ genres }} </h3>
+  <h3> Genres: {{ genres }}</h3>
 </div>
 <div id="buttons">
   <form action="/results" method="post">
-    <button type="submit" name="resubmit">Get another game</button>
-    <button type="submit" name="back_to_filters" value="back_to_filters"> Try a different filter</button>
+    <button id="resubmit" class="button" type="submit" name="resubmit">Get another game</button>
+    <button class="button" type="submit" name="back_to_filters" value="back_to_filters"> Try a different filter</button>
   </form>
 </div>
 {% endblock %}

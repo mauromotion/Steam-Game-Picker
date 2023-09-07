@@ -90,7 +90,7 @@ def home():
         username = request.form.get('username')
         # or get_steam_data(request.form.get('username')) == None:
         if not request.form.get('username') or get_user_data(username) is None:
-            flash('Please make sure you have entered a valid username',
+            flash('Please make sure you have entered a valid username.',
                   'error')
             return render_template('home.html')
         else:
@@ -160,6 +160,7 @@ def filters():
     genres = ''
     nickname = session.get('nickname')
     avatar = session.get('avatar')
+    info_text = ''
 
 # Logic
     match filter:
@@ -168,7 +169,7 @@ def filters():
 
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
-
+            info_text = ' \'s Whole Library'
             session['filters'] = 'any_game'
 
         case 'never_played':
@@ -177,6 +178,7 @@ def filters():
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
+            info_text = ' \'s Never Played Games'
             session['filters'] = 'never_played'
 
         case 'only_played':
@@ -185,33 +187,38 @@ def filters():
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
+            info_text = ' \'s Already Played Games'
             session['filters'] = 'only_played'
 
-        case 'top_5':
-            query = "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 5"
-
-            name, playtime, url, description, image, metacritic, genres = get_random_game(
-                query)
-
-            session['filters'] = 'top_5'
-
         case 'top_10':
-
             query = "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 10"
 
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
+            info_text = ' \'s Top 10 Most Played Games'
             session['filters'] = 'top_10'
 
-        case 'top_20':
+        case 'top_25':
 
-            query = "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 20"
+            query = "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 25"
 
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
-            session['filters'] = 'top_20'
+            info_text = ' \'s Top 25 Most Played Games'
+            session['filters'] = 'top_25'
+
+        case 'top_50':
+
+            query = "SELECT id, appid, name, playtime FROM library ORDER BY playtime DESC LIMIT 50"
+
+            name, playtime, url, description, image, metacritic, genres = get_random_game(
+                query)
+
+            info_text = ' \'s Top 50 Most Played Games'
+            info_text = 'Top 50 most played games in library'
+            session['filters'] = 'top_50'
 
         case _:
             print('error')
@@ -226,7 +233,8 @@ def filters():
         metacritic=metacritic,
         genres=genres,
         avatar=avatar,
-        nickname=nickname
+        nickname=nickname,
+        info_text=info_text
     )
 
 

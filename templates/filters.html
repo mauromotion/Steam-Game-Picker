@@ -4,33 +4,42 @@
 Steam Random Game Picker
 {% endblock %}
 
+
+{% block header %}
+<div id="header">
+  <h1 ><a id="title" href="/"><i id="steam-icon" class="fa-brands fa-square-steam"></i>
+      Steam Game Picker</a></h1>
+  <image src={{ avatar }} id="avatar">
+  <h3>{{ nickname }}</h3>
+</div>
+{% endblock %}
+
 {% block main %}
 <h2>Hello {{ nickname }}!</h2>
-<image src={{ avatar }} />
-<h4>{{ tot_games }} Games Owned</h4>
+<h3>There are <em>{{ tot_games }} games</em> in your Steam library.</h3>
 <form action="/filters" method="post">
   <fieldset>
-    <legend><h3>Make your choices</h3></legend>
+    <legend><h3>Pick a random game between:</h3></legend>
     <div>
-      <div>
+      <div class="filter">
         <input id="any_game" name="filter" value="any_game" placeholder="Any Game" type="radio" checked />
-        <label for="any_game">Any game</label>
+        <label for="any_game"><b>Any</b> game in the library</label>
         <input id="never_played" name="filter" value="never_played"placeholder="Never Played Games" type="radio" />
-        <label for="never_played">Never played games only</label>
+        <label for="never_played"><b>Never played</b> games only</label>
         <input id="only_played" name="filter" value="only_played"placeholder="Only Played Games" type="radio" />
-        <label for="only_played">Already played games only</label>
+        <label for="only_played"><b>Already played</b> games only</label>
       </div>
-      <div>
-        <input id="top_5" name="filter" value="top_5" placeholder="Top 5 Most Played Games" type="radio" />
-        <label for="top_5">Top 5 played games only</label>
+      <div class="filter">
         <input id="top_10" name="filter" value="top_10" placeholder="Top 10 Most Played Games" type="radio" />
-        <label for="top_10">Top 10 played games only</label>
-        <input id="top_20" name="filter" value="top_20" placeholder="Top 20 Most Played Games" type="radio" />
-        <label for="top_20">Top 20 played games only</label>
+        <label for="top_25"><b>Top 10</b> most played</label>
+        <input id="top_50" name="filter" value="top_25" placeholder="Top 25 Most Played Games" type="radio" />
+        <label for="top_10"><b>Top 25</b> most played</label>
+        <input id="top_25" name="filter" value="top_50" placeholder="Top 50 Most Played Games" type="radio" />
+        <label for="top_50"><b>Top 50</b> most played</label>
       </div>
     </div>
     <div>
-      <button class="button" type="submit">Get a random game</button>
+      <button id="filters-button" class="button" type="submit">Get a random game</button>
     </div>
   </fieldset>
 </form>

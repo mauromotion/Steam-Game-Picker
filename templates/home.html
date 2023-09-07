@@ -4,13 +4,20 @@
 Steam Random Game Picker
 {% endblock %}
 
+{% block header %}
+<h1 ><a id="title" href="/"><i id="steam-icon" class="fa-brands fa-square-steam"></i>
+    Steam Game Picker</a></h1>
+{% endblock %}
+
 {% block main %}
-<form action="/" method="post">
-  <div>
-    <input id="username" name="username" placeholder="Enter your username" type="username" />
-    <button class="button" type="submit">Submit</button>
-  </div>
-</form>
+<div id="home-main">
+  <form action="/" method="post">
+    <div id="home-form">
+      <input id="username" name="username" placeholder="Enter your username" type="username" />
+      <button class="button" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
 <div id="error">
   {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
