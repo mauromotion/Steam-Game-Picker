@@ -25,23 +25,6 @@ def init_db():
     return db
 
 
-# @app.teardown_appcontext
-# def close_connection(exception):
-#     db = sqlite3.connect('library.db')
-#     if db is not None:
-#         c = db.cursor()
-#         c.execute("DROP TABLE user")
-#         print("Table user dropped... ")
-#         c.execute("DROP TABLE library")
-#         print("Table user dropped... ")
-#         db.commit()
-#         db.close()
-
-# @app.teardown_appcontext
-# def resetdb(exception):
-#     init_db()
-
-
 # Select a random game from a list based on a query
 def get_random_game(query):
     # Initialize db
@@ -169,7 +152,7 @@ def filters():
 
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
-            info_text = ' \'s Whole Library'
+            info_text = ' \'s Library'
             session['filters'] = 'any_game'
 
         case 'never_played':
