@@ -1,13 +1,13 @@
 * {
-   box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* MAIN */
 
 body {
-  background-color: #1A2738;
-  color: #FFFFFE;
-  font-family: 'Noto Sans', sans-serif;
+  background-color: #1a2738;
+  color: #fffffe;
+  font-family: "Noto Sans", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,38 +16,39 @@ body {
   overflow: hidden;
   margin: 0;
 }
+
 header {
   height: 125px;
   width: 100%;
   position: relative;
-  background-color: #171D25;
+  background-color: #171d25;
 }
 
 main {
-  position: relative; 
+  position: relative;
 }
 
 a {
-  color: #1A9FFF;
+  color: #1a9fff;
   text-decoration: none;
 }
 
 a:hover {
-  color: #67C6F3;
+  color: #67c6f3;
 }
 
 b {
-  color: #1A9FFF
+  color: #1a9fff;
 }
 
 em {
-  color: #D2E885;
+  color: #d2e885;
 }
 
 /* Header */
 
 #header {
-  display:flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: left;
@@ -58,7 +59,7 @@ em {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  color: #FFFFFE; 
+  color: #fffffe;
   font-size: 3rem;
 }
 
@@ -68,14 +69,14 @@ em {
 }
 
 #info_text {
-  float:right;
+  float: right;
   text-align: right;
 }
 
 .button {
-  background-color: #1A9FFF;
+  background-color: #1a9fff;
   border: none;
-  color: #FFFFFE;
+  color: #fffffe;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -87,7 +88,7 @@ em {
 }
 
 .button:hover {
-  background-color: #67C6F3
+  background-color: #67c6f3;
 }
 
 /* Home */
@@ -100,7 +101,7 @@ em {
 }
 
 #home-form {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -112,7 +113,7 @@ em {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  color: #FFFFFE;
+  color: #fffffe;
   text-align: center;
   font-size: 1.5em;
   margin: 20px;
@@ -125,10 +126,12 @@ em {
 /* Filters */
 
 fieldset {
-  background-color: #2A3F5A;
+  background-color: #2a3f5a;
   border-style: none;
   border-radius: 4px;
-  box-shadow: 0 4px 4px #171D25, 0 4px 2px #171D25; 
+  box-shadow:
+    0 4px 4px #171d25,
+    0 4px 2px #171d25;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -161,7 +164,7 @@ label {
 }
 
 .filter input[type="radio"] {
-  float:right;
+  float: right;
   height: 30px;
   line-height: 30px;
   vertical-align: bottom;
@@ -193,16 +196,16 @@ label {
 }
 
 #buttons {
- display: flex;
- flex-direction: row;
- justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
-#resubmit  {
-  background-color: #5C7E10;
-  color: #D2E885;
+#resubmit {
+  background-color: #5c7e10;
+  color: #d2e885;
 }
 
 #resubmit:hover {
-  background-color: #77A315;
-  color: #E1F0AD;
+  background-color: #77a315;
+  color: #e1f0ad;
 }

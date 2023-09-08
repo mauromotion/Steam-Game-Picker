@@ -9,16 +9,17 @@ steam = Steam(KEY)
 # Get data from Steam API
 def get_user_data(username):
 
-    class APIError(Exception):
-        """Custom exception raised when API does not return data"""
-        pass
-
     try:
         # Fetch user's info
         userinfo = steam.users.search_user(username)
-        # FIXME: TypeError: string indices must be integers, not 'str'
-        # Check what is return from the API when a non-existent username is used
+
+        # Fetch data for the user
         steam_id = userinfo['player']['steamid']
+
+        # Check if the username is valid
+        # if not isinstance(userinfo['player'], int):
+        #     return None
+
         nickname = userinfo['player']['personaname']
         tot_games = steam.users.get_owned_games(steam_id)['game_count']
         avatar = userinfo['player']['avatarfull']
@@ -29,14 +30,10 @@ def get_user_data(username):
             'tot_games': tot_games,
             'avatar': avatar
         }
-        if not userinfo:
-            raise APIError("No data received from API")
 
         return user_data
 
-    # except (KeyError, ValueError, IndexError):
-    except APIError as e:
-        print("Error:", e)
+    except (KeyError, ValueError, IndexError, TypeError):
         return None
 
 
