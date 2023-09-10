@@ -152,7 +152,7 @@ def filters():
 
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
-            info_text = ' \'s Library'
+            info_text = 'From Your Steam\'s Library:'
             session['filters'] = 'any_game'
 
         case 'never_played':
@@ -161,7 +161,7 @@ def filters():
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
-            info_text = ' \'s Never Played Games'
+            info_text = 'From Your Never Played Games:'
             session['filters'] = 'never_played'
 
         case 'only_played':
@@ -170,7 +170,7 @@ def filters():
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
-            info_text = ' \'s Already Played Games'
+            info_text = 'From The Games You\'ve Already Played:'
             session['filters'] = 'only_played'
 
         case 'top_10':
@@ -179,7 +179,7 @@ def filters():
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
-            info_text = ' \'s Top 10 Most Played Games'
+            info_text = 'From Your Top 10 Most Played Games:'
             session['filters'] = 'top_10'
 
         case 'top_25':
@@ -189,7 +189,7 @@ def filters():
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
-            info_text = ' \'s Top 25 Most Played Games'
+            info_text = 'From Your Top 25 Most Played Games:'
             session['filters'] = 'top_25'
 
         case 'top_50':
@@ -199,8 +199,7 @@ def filters():
             name, playtime, url, description, image, metacritic, genres = get_random_game(
                 query)
 
-            info_text = ' \'s Top 50 Most Played Games'
-            info_text = 'Top 50 most played games in library'
+            info_text = 'From Your Top 50 Most Played Games:'
             session['filters'] = 'top_50'
 
         case _:

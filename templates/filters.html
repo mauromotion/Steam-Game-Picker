@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Steam Random Game Picker
+Steam Game Picker - Filters
 {% endblock %}
 
 
@@ -15,8 +15,10 @@ Steam Random Game Picker
 {% endblock %}
 
 {% block main %}
-<h2>Hello {{ nickname }}!</h2>
-<h3>There are <em>{{ tot_games }} games</em> in your Steam library.</h3>
+<div id="filters-hello">
+  <h2>Hello {{ nickname }}!</h2>
+  <h3>There are <em>{{ tot_games }} games</em> in your Steam library.</h3>
+</div>
 <form action="/filters" method="post">
   <fieldset>
     <legend><h3>Pick a random game between:</h3></legend>

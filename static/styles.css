@@ -5,7 +5,9 @@
 /* MAIN */
 
 body {
-  background-color: #1a2738;
+  /* background-color: #1a2738; */
+  background: radial-gradient(circle at bottom right, #2a3f5a, #1a2738);
+  background-size: 100% 200%;
   color: #fffffe;
   font-family: "Noto Sans", sans-serif;
   display: flex;
@@ -25,7 +27,21 @@ header {
 }
 
 main {
-  position: relative;
+  flex: 1;
+}
+
+footer {
+  height: 100px;
+  width: 100%;
+  background-color: #171d25;
+  position: absolute;
+  bottom: 0;
+}
+
+footer p {
+  text-align: right;
+  margin: 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
 }
 
 a {
@@ -55,13 +71,13 @@ em {
   margin: 1.2rem;
 }
 
-#header :nth-child(3) {
-  padding-top: 20px;
-}
+/* #header :nth-child(4) { */
+/*   padding-top: 20px; */
+/* } */
 
-#header :nth-child(4) {
-  padding-top: 20px;
-}
+/* #header :nth-child(5) { */
+/*   padding-top: 20px; */
+/* } */
 
 #title {
   position: absolute;
@@ -131,18 +147,24 @@ em {
 
 /* Filters */
 
+#filters-hello {
+  margin-top: 4rem;
+}
+
 fieldset {
-  background-color: #2a3f5a;
+  background-color: #1a2738;
   border-style: none;
-  border-radius: 4px;
-  box-shadow:
-    0 4px 4px #171d25,
-    0 4px 2px #171d25;
+  /* border-radius: 4px; */
+  /* box-shadow: */
+  /* 0 4px 4px #171d25, */
+  /* 0 4px 2px #171d25; */
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: center;
   width: 100%;
+  padding: 2rem;
+  margin-top: 4rem;
 }
 
 input {
@@ -187,20 +209,26 @@ label {
 
 /* Results */
 
+#info-text {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
 #card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap;
-  min-height: 50vh;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  min-height: 25vh;
   max-width: 460px;
-  margin: 25px;
+  margin: 4rem 3rem 0 0;
+  left: 25%;
 }
 
-/* #card > * { */
-/*   flex: 1; */
-/* } */
+#card-bg {
+  background-color: #171d25;
+  padding: 0 20px 1rem 20px;
+}
 
 #card :nth-child(2) {
   display: flex;
@@ -211,7 +239,9 @@ label {
 }
 #card :nth-child(5) {
   align-self: flex-end;
+  text-align: right;
 }
+
 #description {
   text-align: justify;
   width: 460px;
@@ -220,8 +250,12 @@ label {
 #buttons {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 0 0 2rem;
+  max-width: 460px;
 }
+
 #resubmit {
   background-color: #5c7e10;
   color: #d2e885;
