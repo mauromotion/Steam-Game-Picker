@@ -71,12 +71,12 @@ All the HTML templates are in the `templates` directory.
 
 ### Home page
 
-img
+![Home page](./screenshots/01_Home.jpg)
 
 ### Filters's page
 
-img
+![Filters' page](./screenshots/02_Filters.jpg)
 
 ### Result's page
 
-img
+![Result's page](./screenshots/03_Result.jpg)
