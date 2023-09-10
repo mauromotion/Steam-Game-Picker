@@ -1,6 +1,6 @@
 # Steam Game Picker
 
-#### Video demo: <url here>
+#### Video demo: https://peertube.tv/w/7AZzHBTtCuWDWcEXoWpuWB
 
 _This is my final project for [Harvard's CS50x](https://cs50.harvard.edu/x/2023/)._
 
