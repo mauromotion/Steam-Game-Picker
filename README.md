@@ -2,19 +2,20 @@
 
 #### Video demo: <url here>
 
-## Description:
-
 _This is my final project for [Harvard's CS50x](https://cs50.harvard.edu/x/2023/)._
 
+_Many thanks to professor David Malan and all the TAs that made CS50 such a great learning experience._
 
-Have you hoarded too many games on your [Steam](https://steamcommunity.com/) account during the last few sales? 
+## Description:
+
+Have you hoarded hundreds (or even thousands!) of videogames on your [Steam](https://steamcommunity.com/) account during the last few sales? 
 Do you even remember what games are in your library anymore?
 Or maybe you feel like playing a game but you can't decide which one because you have too may choices?
 
-The Steam Game Picker will help you choose the next game to play!
+The *Steam Game Picker* will help you choose the next game to play!
 
 ### Home page:
-First make sure you enter your [correct Steam username](https://www.wikihow.com/See-Your-Account-Name-in-Steam). The app will now load your library.
+First make sure you enter your [correct Steam username](https://www.wikihow.com/See-Your-Account-Name-in-Steam). Click the _submit_ button and the app will now load your library.
 
 ### Filters page:
 
@@ -30,7 +31,7 @@ Then you can click the button and the app will choose a random game between the 
 
 ### Result page:
 
-Here you can click the title or the thumbnail of the game and get to its Steam page. There is also some useful information about the game here:
+Here you can click the title or the thumbnail of the game and get to its Steam store page. There is also some useful information about the game:
 - How many hours you've played the game for
 - The metacritic score
 - The various game's genres
@@ -47,7 +48,7 @@ If you want to try it out on your local machine you'll have to follow a few step
 
 - Get your own [Steam API key](https://steamcommunity.com/dev)
 - Clone this repository
-- Save the key in an .env file in the cloned repository as:
+- Save your Steam API key in an `.env` file in the cloned repository as:
 ``` STEAM_API_KEY=<YOUR KEY HERE> ```
 - Install all the python requirements with:
 ```$ pip install -r requirements.txt ```
@@ -56,10 +57,14 @@ If you want to try it out on your local machine you'll have to follow a few step
 
 ### What's in the files:
 
-The main aplication resides in `app.py`. 
+The main aplication resides in `app.py`.
+
 There also some functions that I wrote separatly for cleanliness in `helpers.py`.
+
 In `schema.sql` there's the actual schema used by SQLite to build the `library.sql` database.
-The css file for the style is in the `static` directory.
+
+The (vanilla ) CSS file for the style is in the `static` directory.
+
 All the HTML templates are in the `templates` directory.
 
 
