@@ -7,7 +7,7 @@
 body {
   /* background-color: #1a2738; */
   background: radial-gradient(circle at bottom right, #2a3f5a, #1a2738);
-  background-size: 100% 200%;
+  background-size: 100% 400%;
   color: #fffffe;
   font-family: "Noto Sans", sans-serif;
   display: flex;
@@ -70,14 +70,6 @@ em {
   justify-content: flex-start;
   margin: 1.2rem;
 }
-
-/* #header :nth-child(4) { */
-/*   padding-top: 20px; */
-/* } */
-
-/* #header :nth-child(5) { */
-/*   padding-top: 20px; */
-/* } */
 
 #title {
   position: absolute;

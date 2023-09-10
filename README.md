@@ -10,7 +10,7 @@ _Many thanks to professor David Malan and all the TAs that made CS50 such a grea
 
 Have you hoarded hundreds (or even thousands!) of videogames on your [Steam](https://steamcommunity.com/) account during the last few sales? 
 Do you even remember what games are in your library anymore?
-Or maybe you feel like playing a game but you can't decide which one because you have too may choices?
+Or maybe you feel like playing a game but you can't decide which one because you have too many choices?
 
 The *Steam Game Picker* will help you choose the next game to play!
 
@@ -36,7 +36,7 @@ Here you can click the title or the thumbnail of the game and get to its Steam s
 - The metacritic score
 - The various game's genres
 
-If you don't like the game you can click the green button and try another pick with the same settings you've chosen before.
+If you don't like the game you can click on the green button and try another pick with the same settings you've chosen before.
 Or, with the blue button, you can go back to the filters' page and make a different selection.
 ## Technical description:
 
@@ -67,4 +67,16 @@ The (vanilla ) CSS file for the style is in the `static` directory.
 
 All the HTML templates are in the `templates` directory.
 
+## Screenshots:
 
+### Home page
+
+img
+
+### Filters's page
+
+img
+
+### Result's page
+
+img
