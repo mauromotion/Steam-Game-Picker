@@ -5,8 +5,8 @@
 /* MAIN */
 
 body {
-  /* background-color: #1a2738; */
-  background: radial-gradient(circle at bottom right, #2a3f5a, #1a2738);
+  background-color: #1a2738;
+  /* background: radial-gradient(circle at bottom right, #2a3f5a, #1a2738); */
   background-size: 100% 400%;
   color: #fffffe;
   font-family: "Noto Sans", sans-serif;

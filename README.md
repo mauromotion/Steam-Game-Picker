@@ -55,6 +55,9 @@ If you want to try it out on your local machine you'll have to follow a few step
 - Run the Flask application with:
 ```python3 app.py```
 
+I made it so it's quite easy to implement new filters, it's just a matter of writing a new SQL query, add a new case in app.py and update the HTML.
+I might implement new filters in the future, for example selections based on genres or even moods.
+
 ### What's in the files:
 
 The main aplication resides in `app.py`.
